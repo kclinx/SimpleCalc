@@ -25,9 +25,7 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
 
     public SimpleCalc3() {
         frame = new JFrame();
-
         GridBagLayout layout = new GridBagLayout();
-
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setTitle("SimpleCalc3");
         frame.getContentPane().setLayout(layout);
@@ -37,7 +35,6 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.weighty = 1;
-
         int numX = 0;
         int numY = 2;
 
@@ -182,13 +179,11 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
         int opNum = 0;
         int prevOp = -1;
         float val = 0;
-        //String operators = "+-*/";
 
         /* Iterate through our input string;  if we find an operator,
          * take note of its position in the string. */
         for(int i=0; i<text.length(); i++) {
             for(int u=0; u<operators.length(); u++) {
-
                 if(text.charAt(i) == operators.charAt(u)) {
                     // grab operator
                     int needBreak = 0;
@@ -211,7 +206,6 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
             for(int i=0; i<offset[0]; i++) {
                 numArray[0] = numArray[0]+text.charAt(i);
             }
-
             for(int i=1; i < opNum; i++) {
                 numArray[i] = "";
                 for(int x=offset[i - 1] + 1; x<offset[i]; x++) {
@@ -224,26 +218,15 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
             }
         }
 
-        // debugging
-        /*for(int i=0; i<=opNum; i++) {
-            System.out.println("numArray[" + i + "]: " + numArray[i]);
-            System.out.println("op[" + i + "]: " + op[i]);
-        }
-        System.out.println("-------------");
-        // System.out.println("do" + i + "-" + opNum + ": " + val + op[i] + numArray[i+1]);
-        */
-
         if((opNum != 0) && (numArray[1] != "")) {
             try {
                 /* This code does the mathematical operations left to right,
                  * one at a time.  It completely ignores the order of operations
                  */
-
                 String tmpOp;
                 // do initial operation
                 tmpOp = doCalcOp(op[0], Float.parseFloat(numArray[0]), Float.parseFloat(numArray[1]));
                 if(tmpOp != "err") {
-
                     /* do sequential operations in a loop, one at a time
                      * storing the result of each operation in a variable `val`
                      *  and then doing 'val [op] nextNumber'
@@ -260,7 +243,6 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
                 } else {
                     output = "error";
                 }
-
                 if(output != "error") output = Float.toString(val);
             } catch (Exception e) {
                 /* errors caught here will most likely be due to invalid characters
@@ -268,9 +250,7 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
                  */
                 output = "Caught Error!";
             }
-
         }
-
         return output;
     }
 

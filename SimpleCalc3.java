@@ -133,14 +133,10 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
             // if the CLEAR key was pressed; empty input box
             input.setText("");
             output.setText("");
-        } else if ("=".equals(e.getActionCommand())) {
+        } /*else if ("=".equals(e.getActionCommand())) {
             // if the '=' key was pressed; do Calculate()
-            String text = input.getText();
-            String newText = Calculate(text);
-            if(newText != "defaultError") {
-                output.setText("= " + newText);
-            }
-        } else {
+            Calculate();
+        }*/ else {
             // if one of the number keys has been pressed,
             // add that character to our input box
             String inputText = input.getText();
@@ -150,20 +146,12 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
 
     public void insertUpdate(DocumentEvent ev) {
         // on update; do Calculate()
-        String text = input.getText();
-        String newText = Calculate(text);
-        if(newText != "defaultError") {
-            output.setText("= " + newText);
-        }
+        Calculate();
     }
 
     public void removeUpdate(DocumentEvent ev) {
         // on update; do Calculate()
-        String text = input.getText();
-        String newText = Calculate(text);
-        if(newText != "defaultError") {
-            output.setText("= " + newText);
-        }
+        Calculate();
     }
 
     public void changedUpdate(DocumentEvent ev) {
@@ -173,15 +161,19 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
         public void actionPerformed(ActionEvent ev) {
             // this only happens when enter has been pressed while
             // focused on the input box;  it calls Calculate()
-            String text = input.getText();
-            String newText = "= " + Calculate(text);
-            if(newText != "defaultError") {
-                output.setText(newText);
-            }
+            Calculate();
         }
     }
 
-    private String Calculate(String text) {
+    private void Calculate() {
+        String text = input.getText();
+        String newText = doCalculation(text);
+        if(newText != "defaultError") {
+            output.setText("= " + newText);
+        }
+    }
+
+    private String doCalculation(String text) {
         // our main calculation logic
         String output = "defaultError";
         String numArray[] = new String[256];
@@ -278,6 +270,12 @@ public class SimpleCalc3 implements ActionListener, DocumentListener {
             }
 
         }
+
+        return output;
+    }
+
+    private String doPolySolve(String input) {
+        String output = "error";
 
         return output;
     }
